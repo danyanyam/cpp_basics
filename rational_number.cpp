@@ -1,3 +1,8 @@
+//
+// task without solution was taken from
+// https://www.coursera.org/learn/c-plus-plus-white/lecture/ifJgS/vviedieniie-v-iskliuchieniia
+//
+
 #include <iostream>
 #include <map>
 #include <numeric>
