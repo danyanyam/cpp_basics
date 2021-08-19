@@ -3,6 +3,7 @@
 // https://www.coursera.org/learn/c-plus-plus-white/lecture/ifJgS/vviedieniie-v-iskliuchieniia
 //
 
+#include <exception>
 #include <iostream>
 #include <map>
 #include <numeric>
@@ -31,6 +32,9 @@ class Rational {
     int numerator() const { return p; }
     int denominator() const { return q; }
     void setNumber(int& new_p, int& new_q) {
+        if (new_q == 0) {
+            throw invalid_argument("denominator cant be zero");
+        }
         tuple<int, int> args = validatepq(new_p, new_q);
         p = get<0>(args);
         q = get<1>(args);
@@ -107,6 +111,9 @@ Rational operator*(const Rational& lhs, const Rational& rhs) {
                     lhs.denominator() * rhs.denominator());
 }
 Rational operator/(const Rational& lhs, const Rational& rhs) {
+    if (rhs == Rational(0, 1)) {
+        throw domain_error("can't divide by zero!");
+    }
     return Rational(lhs.numerator() * rhs.denominator(),
                     lhs.denominator() * rhs.numerator());
 }
@@ -114,6 +121,9 @@ Rational operator*(const Rational& lhs, const int& rhs) {
     return Rational(lhs.numerator() * rhs, lhs.denominator());
 }
 Rational operator/(const Rational& lhs, const int& rhs) {
+    if (rhs == 0) {
+        throw domain_error("cant divide by zero!");
+    }
     return Rational(lhs.numerator(), lhs.denominator() * rhs);
 }
 Rational operator*(const int& rhs, const Rational& lhs) {
